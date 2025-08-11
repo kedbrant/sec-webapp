@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC Filings Analyzer - Trading Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-chart-line"></i> SEC Trading Analyzer</h1>
+                <p class="subtitle">Real-time institutional position tracking for trading opportunities</p>
+                <div class="status-indicator">
+                    <span id="api-status" class="status-dot"></span>
+                    <span id="status-text">Connecting...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Stats -->
+        <section class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+                <div class="stat-content">
+                    <h3 id="total-opportunities">-</h3>
+                    <p>Trading Opportunities</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-building"></i></div>
+                <div class="stat-content">
+                    <h3 id="total-companies">-</h3>
+                    <p>Companies Tracked</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="stat-content">
+                    <h3 id="total-filings">-</h3>
+                    <p>SEC Filings</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                <div class="stat-content">
+                    <h3 id="total-value">-</h3>
+                    <p>Total Position Value</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trading Opportunities -->
+        <section class="trading-section">
+            <div class="section-header">
+                <h2><i class="fas fa-fire"></i> Top Trading Opportunities</h2>
+                <div class="controls">
+                    <button id="refresh-data" class="btn-primary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <select id="ownership-filter" class="filter-select">
+                        <option value="5.0">Min 5% Ownership</option>
+                        <option value="8.0">Min 8% Ownership</option>
+                        <option value="10.0">Min 10% Ownership</option>
+                    </select>
+                </div>
+            </div>
+            <div id="opportunities-container" class="opportunities-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading opportunities...
+                </div>
+            </div>
+        </section>
+
+        <!-- Sector Analysis -->
+        <section class="sector-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-pie"></i> Sector Activity</h2>
+            </div>
+            <div id="sector-container" class="sector-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading sector data...
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Filings -->
+        <section class="filings-section">
+            <div class="section-header">
+                <h2><i class="fas fa-list"></i> Recent SEC Filings</h2>
+                <div class="form-type-filter">
+                    <button class="form-filter active" data-form="all">All</button>
+                    <button class="form-filter" data-form="13D">13D</button>
+                    <button class="form-filter" data-form="13G">13G</button>
+                    <button class="form-filter" data-form="13G/A">13G/A</button>
+                </div>
+            </div>
+            <div id="filings-container" class="filings-list">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading filings...
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>SEC Filings Analyzer v2.0.0 | Data from SEC EDGAR | 
+               <a href="/docs" target="_blank">API Docs</a></p>
+        </footer>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
