@@ -1,9 +1,15 @@
-fastapi==0.104.1
-uvicorn==0.24.0
-sqlalchemy==2.0.23
-requests==2.31.0
-beautifulsoup4==4.12.2
-lxml==4.9.3
-pandas==2.1.3
-python-multipart==0.0.6
-pydantic==2.5.0
+# Core web framework and database
+fastapi
+uvicorn
+sqlalchemy
+
+# Web scraping and HTTP requests  
+requests
+beautifulsoup4
+
+# API support
+python-multipart
+pydantic
+
+# Note: pandas and lxml removed due to Python 3.13 compatibility issues
+# Can be added later when compatible versions are released
