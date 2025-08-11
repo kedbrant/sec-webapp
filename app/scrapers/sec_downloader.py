@@ -22,15 +22,27 @@ class SECFilingDownloader:
             # Clean accession number
             accession_clean = accession_number.replace('-', '')
             
-            # Build URL for the filing
-            url = f"{self.base_url}/Archives/edgar/data/{accession_clean[:10]}/{accession_clean}/{accession_number}.txt"
+            # Extract CIK from accession number (first 10 digits)
+            cik = accession_clean[:10]
             
-            response = requests.get(url, headers=self.headers)
-            response.raise_for_status()
+            # Build URL for the filing - try multiple formats
+            urls_to_try = [
+                f"{self.base_url}/Archives/edgar/data/{cik}/{accession_clean}/{accession_number}.txt",
+                f"{self.base_url}/Archives/edgar/data/{int(cik)}/{accession_clean}/{accession_number}.txt"
+            ]
             
-            return self.parse_filing_content(response.text, accession_number)
+            for url in urls_to_try:
+                try:
+                    response = requests.get(url, headers=self.headers)
+                    response.raise_for_status()
+                    return self.parse_filing_content(response.text, accession_number)
+                except requests.RequestException:
+                    continue
             
-        except requests.RequestException as e:
+            print(f"Could not find filing {accession_number} at any URL")
+            return None
+            
+        except Exception as e:
             print(f"Error downloading filing {accession_number}: {e}")
             return None
     
